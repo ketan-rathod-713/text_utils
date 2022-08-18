@@ -9,10 +9,13 @@ export default function TextForm(props) {
     const handleUppercase = ()=>{
         let uppercase = text.toUpperCase()
         setText(uppercase)
+        props.showAlert("Converted to UpperCase","success")
     }
     const handleLowercase = ()=>{
         let uppercase = text.toLowerCase()
         setText(uppercase)
+        props.showAlert("Converted to LowerCase","success")
+
     }
 
     const handleonChange = (event)=>{ // when we are listening for any event in react then it provides us with an event object
@@ -25,6 +28,8 @@ export default function TextForm(props) {
         let text = textArea.value
         // let arr = text.split(/[" "]/)
         textArea.value = text.replace(/\s+/g, ' ')
+        props.showAlert("Removed extra spaces","success")
+
     }
 
     const [text, setText] = useState(""); // ab me count ko jaha bhi update karuga vo update ho jaega
