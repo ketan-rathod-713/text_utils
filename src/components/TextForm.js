@@ -27,9 +27,14 @@ export default function TextForm(props) {
         let textArea = document.getElementById("textArea")
         let text = textArea.value
         // let arr = text.split(/[" "]/)
-        textArea.value = text.replace(/\s+/g, ' ')
+        setText(text.replace(/\s+/g, ' '))
         props.showAlert("Removed extra spaces","success")
 
+    }
+
+    const copyText = ()=>{
+        navigator.clipboard.writeText(text)
+        props.showAlert("Text Copied","success")
     }
 
     const [text, setText] = useState(""); // ab me count ko jaha bhi update karuga vo update ho jaega
@@ -42,11 +47,14 @@ export default function TextForm(props) {
     <button className="btn btn-primary mt-2 mx-2" onClick={handleUppercase}>Convert to Uppercase</button>
     <button className="btn btn-primary mt-2 mx-2" onClick={handleLowercase}>Convert to Lowercase</button>
     <button className="btn btn-primary mt-2 mx-2" onClick={removeExtraSpaces}>Remove Extra Spaces</button>
+    <button className="btn btn-primary mt-2 mx-2" onClick={copyText}>Copy Text</button>
 </div>
 
 <div className="container" style={{color: props.mode === 'dark' ? 'white' : 'black'}}>
     <h1>Your text summary</h1>
-    <p>{text.split(" ").length} words and {text.length} characters</p>
+    <p>{text.split(' ')
+       .filter(function(n) { return n != '' })
+       .length} words and {text.length} characters</p>
     <p>{0.008 * text.split(" ").length} Minutes Reading Time Required</p>
     <h2>Preview</h2>
     <p>{text}</p>
